@@ -1,0 +1,28 @@
+---
+import { ui } from '../i18n/ui';
+
+const items = [
+  { key: "marquee.saas", emoji: "🚀" },
+  { key: "marquee.ai", emoji: "🤖" },
+  { key: "marquee.student", emoji: "🎓" },
+  { key: "marquee.stack", emoji: "💻" },
+  { key: "marquee.indie", emoji: "🛠️" },
+];
+---
+
+<div class="marquee-container mb-12 scroll-animate">
+  <div class="marquee-content">
+    {Array(4).fill(0).map(() => (
+      <>
+        {items.map((item) => (
+          <div class="flex items-center gap-2 whitespace-nowrap">
+            <span class="text-lg">{item.emoji}</span>
+            <span class="text-sm font-bold text-[var(--text-primary)] uppercase tracking-widest" data-i18n={item.key}>
+              {ui.en[item.key as keyof typeof ui.en]}
+            </span>
+          </div>
+        ))}
+      </>
+    ))}
+  </div>
+</div>

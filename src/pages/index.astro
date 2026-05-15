@@ -1,0 +1,237 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Hero from '../components/Hero.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import Marquee from '../components/Marquee.astro';
+import Footer from '../components/Footer.astro';
+
+const allProjects = await getCollection('projects');
+const projects = allProjects.sort((a, b) => a.data.order - b.data.order);
+---
+
+<Layout title="Lenin - Full Stack AI Developer">
+  <Navbar />
+  
+  <main class="pt-32 pb-12 space-y-12">
+    
+    <div class="max-w-[1200px] mx-auto px-4 md:px-8">
+      {/* 1. Hero Section */}
+      <Hero />
+    </div>
+
+    {/* 2. Marquee Roles */}
+    <Marquee />
+
+    <div class="max-w-[1200px] mx-auto px-4 md:px-8">
+      {/* 3. Main Bento Grid (Part 1) */}
+      <div class="grid grid-cols-1 md:grid-cols-6 gap-3 auto-rows-auto">
+        
+        {/* Stats Card */}
+        <div class="md:col-span-4 bento-card flex items-center justify-around text-center scroll-animate">
+          <div>
+            <span class="text-3xl font-bold text-[var(--text-primary)]">5+</span>
+            <p class="text-[10px] uppercase tracking-widest text-[var(--text-secondary)]" data-i18n="bento.stats.projects">SaaS Projects</p>
+          </div>
+          <div class="w-px h-12 bg-[var(--card-border)]"></div>
+          <div>
+            <span class="text-3xl font-bold text-[var(--text-primary)]">10+</span>
+            <p class="text-[10px] uppercase tracking-widest text-[var(--text-secondary)]" data-i18n="bento.stats.agents">AI Agents</p>
+          </div>
+          <div class="w-px h-12 bg-[var(--card-border)]"></div>
+          <div>
+            <span class="text-3xl font-bold text-[var(--text-primary)]">100%</span>
+            <p class="text-[10px] uppercase tracking-widest text-[var(--text-secondary)]" data-i18n="bento.stats.precision">Precision</p>
+          </div>
+        </div>
+
+        {/* Location Card */}
+        <div class="md:col-span-2 bento-card flex flex-col justify-between scroll-animate">
+          <span class="text-[10px] uppercase tracking-widest text-[var(--text-secondary)]" data-i18n="bento.location.label">Based In</span>
+          <h4 class="text-xl font-bold text-[var(--text-primary)]" data-i18n="bento.location.value">Caracas, VZ 🇻🇪</h4>
+        </div>
+      </div>
+    </div>
+
+    {/* 4. Projects Carousel Section */}
+    <section id="work" class="space-y-8 max-w-[1200px] mx-auto px-4 md:px-8">
+      <div class="flex justify-between items-end">
+        <h2 class="text-4xl font-bold text-gradient" data-i18n="bento.projects.title">My Products</h2>
+        <div class="hidden md:flex gap-2 text-[var(--text-secondary)] text-xs uppercase tracking-widest font-bold items-center">
+          <span class="p-2 border border-[var(--card-border)] rounded-full">←</span>
+          <span>Scroll</span>
+          <span class="p-2 border border-[var(--card-border)] rounded-full">→</span>
+        </div>
+      </div>
+
+      <div class="fade-x-mask">
+        <div class="flex overflow-x-auto gap-4 no-scrollbar snap-x snap-mandatory pb-4">
+          {projects.map((project) => (
+            <ProjectCard 
+              title={project.data.title}
+              description={project.data.description}
+              tag={project.data.tag}
+              image={project.data.image}
+            />
+          ))}
+          {/* Minimal spacer */}
+          <div class="flex-none w-4 h-full"></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="max-w-[1200px] mx-auto px-4 md:px-8">
+      {/* 5. Main Bento Grid (Part 2) */}
+      <div class="grid grid-cols-1 md:grid-cols-6 gap-3 auto-rows-auto">
+        
+        {/* Socials Card */}
+        <div class="md:col-span-3 bento-card flex flex-col justify-between scroll-animate">
+          <span class="text-[10px] uppercase tracking-widest text-[var(--text-secondary)]" data-i18n="bento.connect.label">Connect</span>
+          <div class="flex gap-4">
+            {["GitHub", "LinkedIn", "Twitter"].map(social => (
+              <a href="#" class="text-sm font-bold text-[var(--text-primary)] hover:text-electric-blue transition-colors underline decoration-[var(--card-border)] underline-offset-4">{social}</a>
+            ))}
+          </div>
+        </div>
+
+        {/* Always Learning Card */}
+        <div class="md:col-span-3 bento-card flex flex-col justify-between scroll-animate">
+          <span class="text-[10px] uppercase tracking-widest text-[var(--text-secondary)]" data-i18n="bento.learning.label">Always Learning</span>
+          <p class="text-sm text-[var(--text-primary)] font-medium" data-i18n="bento.learning.value">Deepening in Generative AI and Large Language Models.</p>
+        </div>
+
+        {/* Tech Stack Title */}
+        <div class="md:col-span-full pt-12 pb-8 scroll-animate">
+          <h2 class="text-4xl font-bold text-gradient" data-i18n="bento.stack.title">What I Use</h2>
+        </div>
+
+        {/* Background Card */}
+        <div class="md:col-span-3 bento-card space-y-6 scroll-animate">
+          <span class="text-[10px] uppercase tracking-wider text-[var(--text-secondary)]" data-i18n="bento.background.label">Background</span>
+          <div class="space-y-4 text-left">
+            <div>
+              <h5 class="text-[var(--text-primary)] font-medium" data-i18n="bento.edu.title">Computer Science Student</h5>
+              <p class="text-sm text-[var(--text-secondary)]" data-i18n="bento.edu.sub">Universidad Central de Venezuela</p>
+            </div>
+            <div class="w-full h-px bg-[var(--card-border)]"></div>
+            <div>
+              <h5 class="text-[var(--text-primary)] font-medium" data-i18n="bento.work.title">Freelance AI Developer</h5>
+              <p class="text-sm text-[var(--text-secondary)]" data-i18n="bento.work.sub">2023 - Present</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Certifications Card */}
+        <div class="md:col-span-3 bento-card space-y-4 scroll-animate">
+          <span class="text-[10px] uppercase tracking-wider text-[var(--text-secondary)]" data-i18n="bento.certs.title">Certifications</span>
+          <div class="space-y-3">
+            {[
+              { title: "Generative AI Specialist", issuer: "Google Cloud" },
+              { title: "Deep Learning Specialization", issuer: "DeepLearning.AI" },
+              { title: "Full Stack Open", issuer: "University of Helsinki" }
+            ].map(cert => (
+              <div class="flex items-start gap-3 group/cert">
+                <div class="mt-1 w-1.5 h-1.5 rounded-full bg-electric-blue shrink-0 group-hover/cert:scale-125 transition-transform"></div>
+                <div>
+                  <p class="text-xs font-bold text-[var(--text-primary)] leading-tight">{cert.title}</p>
+                  <p class="text-[10px] text-[var(--text-secondary)] uppercase tracking-wider">{cert.issuer}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Tech Stack Card */}
+        <div class="md:col-span-full bento-card scroll-animate">
+          <div class="flex flex-wrap justify-center gap-3">
+            {["Next.js", "Supabase", "TypeScript", "Tailwind", "Python", "FastAPI", "Docker", "PostgreSQL", "OpenAI", "LangChain"].map(tech => (
+              <span class="px-3 py-1.5 bg-[var(--bg-main)] border border-[var(--card-border)] rounded-lg text-xs text-[var(--text-primary)] font-medium">{tech}</span>
+            ))}
+          </div>
+        </div>
+
+        {/* Final Call Card - New Vertical Centered Layout */}
+        <div class="md:col-span-full relative group scroll-animate">
+          <div class="absolute -inset-1 bg-gradient-to-b from-electric-blue to-royal-purple rounded-bento opacity-10 group-hover:opacity-30 blur-2xl transition-all duration-700"></div>
+          
+          <div class="relative bento-card flex flex-col items-center text-center py-20 px-6 overflow-hidden min-h-[500px] justify-center">
+            {/* Background Decorative Rings */}
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] border border-electric-blue/5 rounded-full pointer-events-none"></div>
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] border border-electric-blue/10 rounded-full pointer-events-none"></div>
+            
+            <div class="flex flex-col items-center gap-8 relative z-10 w-full max-w-2xl">
+              {/* Top Context Row */}
+              <div class="flex flex-wrap items-center justify-center gap-4">
+                <div class="flex items-center gap-2 px-3 py-1 bg-neon-green/10 border border-neon-green/20 rounded-full">
+                  <div class="w-1.5 h-1.5 rounded-full bg-neon-green animate-pulse"></div>
+                  <p class="text-[9px] uppercase tracking-widest font-black text-neon-green" data-i18n="hero.status">Available</p>
+                </div>
+                <div class="w-px h-4 bg-[var(--card-border)]"></div>
+                <div class="flex items-center gap-2">
+                  <span class="text-sm">🇻🇪</span>
+                  <p class="text-[10px] font-bold text-[var(--text-primary)]" id="local-time">--:-- --</p>
+                </div>
+              </div>
+
+              {/* Main Content */}
+              <div class="space-y-4">
+                <h3 class="text-5xl md:text-8xl font-black text-[var(--text-primary)] leading-[0.9] tracking-[ -0.05em]" data-i18n="bento.footer.cta.title">
+                  Let's Build Together
+                </h3>
+                <p class="text-lg md:text-xl text-[var(--text-secondary)] max-w-lg mx-auto leading-relaxed" data-i18n="bento.footer.cta.description">
+                  Turning complex ideas into high-performance products.
+                </p>
+              </div>
+
+              {/* Action Button */}
+              <div class="pt-6 w-full max-w-sm">
+                <a href="mailto:hello@lenin.dev" class="w-full flex items-center justify-center gap-3 px-10 py-5 bg-[var(--text-primary)] text-[var(--bg-main)] font-black uppercase tracking-[0.2em] text-xs rounded-2xl hover:bg-electric-blue hover:text-white transition-all duration-500 shadow-2xl active:scale-[0.98]">
+                  <span data-i18n="bento.footer.cta.button">Get In Touch</span>
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+
+  <script>
+    const observerOptions = {
+      threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.scroll-animate').forEach(el => observer.observe(el));
+
+    // Time Clock
+    function updateClock() {
+      const clockEl = document.getElementById('local-time');
+      if (clockEl) {
+        const now = new Date();
+        const options: Intl.DateTimeFormatOptions = { 
+          timeZone: 'America/Caracas', 
+          hour: '2-digit', 
+          minute: '2-digit',
+          hour12: true 
+        };
+        clockEl.innerText = now.toLocaleTimeString('en-US', options);
+      }
+    }
+    updateClock();
+    setInterval(updateClock, 60000);
+  </script>
+</Layout>
