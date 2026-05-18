@@ -1,0 +1,46 @@
+project: portafolio-web
+context: |
+  Astro 6.x portfolio with Tailwind CSS 4.x and TypeScript.
+  Follows a "Dark Bento" design system (Modular Grid, Neon Pulse).
+  Uses Astro Content Collections for projects.
+  i18n support for English and Spanish.
+strict_tdd: false
+testing:
+  runner: null
+  framework: null
+  coverage: false
+  layers:
+    unit:
+      available: false
+      tool: null
+    integration:
+      available: false
+      tool: null
+    e2e:
+      available: false
+      tool: null
+quality:
+  linter:
+    available: false
+    command: null
+  type_checker:
+    available: true
+    command: "npx astro check"
+  formatter:
+    available: false
+    command: null
+phases:
+  proposal:
+    mode: hybrid
+  spec:
+    mode: hybrid
+  design:
+    mode: hybrid
+  tasks:
+    mode: hybrid
+  apply:
+    mode: hybrid
+  verify:
+    mode: hybrid
+  archive:
+    mode: hybrid
